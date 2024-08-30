@@ -12,18 +12,17 @@ export const ADD_USER = gql`
     }
   }
 `;
-
+// Make mutation matches backend
 export const LOGIN_USER = gql`
-  mutation LOGIN_USER($email: String!, $password: String!) {
+    mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      token
-      user {
-        id
-        username
-        email
-      }
+    token
+    user {
+      username
     }
   }
+}
+
 `;
 
 export const CREATE_EVENT = gql`

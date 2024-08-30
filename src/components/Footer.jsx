@@ -131,9 +131,9 @@ const Footer = () => {
         <section className="footer" id="footer">
           <section className="form-footer">
             <h5 className="text-center mb-2">Designed by Fab Five  </h5>
-            <p className="text-center mb-0">
+            <div className="text-center mb-0">
               <h6>&copy; {new Date().getFullYear()} All rights reserved.</h6>
-            </p>
+            </div>
             
           </section>
           <section className="share-icon">

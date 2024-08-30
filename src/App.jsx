@@ -24,8 +24,9 @@ import UpdateEvent from "./components/UpdateEvent";
 import EventDetails from "./components/EventDetails";
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
-});
+  uri: "http://localhost:3001/graphql"
+  
+});    // Connects backend
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -41,6 +42,7 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
+  // uri: "http://localhost:3001/qraphql",
   cache: new InMemoryCache(),
 });
 

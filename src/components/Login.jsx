@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 
@@ -14,8 +14,11 @@ const Login = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   // using the login_user mutation and setting it to loginUser
-  const [loginUser] = useMutation(LOGIN_USER);
-
+  const [login,{error}] = useMutation(LOGIN_USER);   // Login is fixed , in refreence to backend
+  useEffect(() => {
+   console.log(error);
+  }, [error])
+  
   // save input value in userFromData
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,7 +36,7 @@ const Login = () => {
     }
 
     try {
-      const response = await loginUser({ variables: { ...userFormData } });
+      const response = await login({ variables: { ...userFormData } });
 
       if (!response) {
         throw new Error("something went wrong!");
