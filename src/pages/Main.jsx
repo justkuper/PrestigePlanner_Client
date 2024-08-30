@@ -16,13 +16,13 @@ const Main = ({ loggedIn, children }) => {
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Thomas' Chess Blog</title>
+        <title>Prestige Planner</title>
       </head>
       <body className="bg-dark text-white">
         <header>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-              <a className="navbar-brand fs-2" href="/">Thomas' Chess Blog</a>
+              <a className="navbar-brand fs-2" href="/">Prestige Planner</a>
               <button
                 className="navbar-toggler"
                 type="button"
