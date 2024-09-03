@@ -107,7 +107,7 @@ export default function Footer() {
         {/* Reviews Button */}
         <button
           className="btn btn-primary"
-          style={{ position: 'fixed', bottom: '20px', left: '20px' }}
+          style={{ position: 'absolute', bottom: '-715px', left: '20px' }}
           onClick={() => setShowModal(true)}
         >
           Leave a Review
@@ -134,6 +134,7 @@ export default function Footer() {
                             value={ratingValue}
                             onChange={handleChange}
                             onClick={() => handleRating(ratingValue)}
+                            required
                           />
                           <FontAwesomeIcon
                             icon={faStar}
@@ -160,6 +161,7 @@ export default function Footer() {
                       onChange={handleChange}
                       rows="3"
                       placeholder="Write your review here..."
+                      required
                     ></textarea>
 
                   </div>
@@ -204,4 +206,3 @@ export default function Footer() {
     </footer>
   );
 };
-
