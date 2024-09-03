@@ -14,6 +14,7 @@ export default function Footer() {
   };
 
   const [formData, setFormData] = useState({
+    rating: '',
     review: '',
   });
 
