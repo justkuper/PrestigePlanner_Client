@@ -12,9 +12,8 @@ export default function Footer() {
   const handleRating = (rate) => {
     setRating(rate);
   };
-  
+
   const [formData, setFormData] = useState({
-    rating: '',
     review: '',
   });
 
@@ -26,12 +25,11 @@ export default function Footer() {
     });
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    formData.append("access_key", "a60564ee-a072-49e5-8afb-e25dd322a44f");
+    formData.append("access_key", "");
 
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
@@ -49,7 +47,10 @@ export default function Footer() {
       console.log("Success", res);
     }
     window.alert('Success, Form Submitted!', formData);
-    setFormData({ rating: '', review: '' });
+    setHover(0);
+    setRating(0);
+    setShowModal(false);
+    setFormData({ review: '' });
   };
 
 
@@ -129,9 +130,10 @@ export default function Footer() {
                       return (
                         <label key={index}>
                           <input
+                            id="rating"
                             type="radio"
                             name="rating"
-                            value={ratingValue}
+                            value={rating}
                             onChange={handleChange}
                             onClick={() => handleRating(ratingValue)}
                             required
@@ -153,11 +155,10 @@ export default function Footer() {
                     <label htmlFor="review">Review Description:</label>
 
                     <textarea className="form-control"
-
                       id="review"
                       name="review"
                       type="message"
-                      value={FormData.ratingReview}
+                      value={formData.review}
                       onChange={handleChange}
                       rows="3"
                       placeholder="Write your review here..."
@@ -170,9 +171,6 @@ export default function Footer() {
                     <button type="submit" className="btn btn-primary">Submit Review</button>
                   </div>
                 </form>
-
-
-
 
               </div>
             </div>
@@ -200,7 +198,6 @@ export default function Footer() {
             </a>
           </section>
         </section>
-
 
       </div>
     </footer>
