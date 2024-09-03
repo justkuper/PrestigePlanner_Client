@@ -171,8 +171,8 @@
 }
 
 .share-icon {
-  position: fixed;
-  bottom: 20px;
+  position: absolute;
+  bottom: -715px;
   right: 20px;
 }
 /* COMPONENTS/FOOTER END */
