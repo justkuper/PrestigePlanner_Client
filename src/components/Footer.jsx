@@ -1,18 +1,58 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
-const Footer = () => {
+export default function Footer() {
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-
   const handleRating = (rate) => {
     setRating(rate);
   };
+  
+  const [formData, setFormData] = useState({
+    rating: '',
+    review: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "a60564ee-a072-49e5-8afb-e25dd322a44f");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    }).then((res) => res.json());
+
+    if (res.success) {
+      console.log("Success", res);
+    }
+    window.alert('Success, Form Submitted!', formData);
+    setFormData({ rating: '', review: '' });
+  };
+
+
   return (
     <footer className="footer mt-auto py-3 bg-dark text-white">
       <div className="container">
@@ -65,9 +105,9 @@ const Footer = () => {
         </section>
 
         {/* Reviews Button */}
-        <button 
-          className="btn btn-primary" 
-          style={{ position: 'fixed', bottom: '20px', left: '20px' }} 
+        <button
+          className="btn btn-primary"
+          style={{ position: 'fixed', bottom: '20px', left: '20px' }}
           onClick={() => setShowModal(true)}
         >
           Leave a Review
@@ -79,22 +119,21 @@ const Footer = () => {
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Leave a Review</h5>
-                  <button type="button" className="close" onClick={() => setShowModal(false)}>
-                    <span>&times;</span>
-                  </button>
+                  <h5 className="text-dark modal-title">Leave a Review</h5>
                 </div>
-                <div className="modal-body">
+
+                <form className="modal-body" onSubmit={handleSubmit} >
                   <div className="star-rating">
                     {[...Array(5)].map((star, index) => {
                       const ratingValue = index + 1;
                       return (
                         <label key={index}>
-                          <input 
-                            type="radio" 
-                            name="rating" 
-                            value={ratingValue} 
-                            onClick={() => handleRating(ratingValue)} 
+                          <input
+                            type="radio"
+                            name="rating"
+                            value={ratingValue}
+                            onChange={handleChange}
+                            onClick={() => handleRating(ratingValue)}
                           />
                           <FontAwesomeIcon
                             icon={faStar}
@@ -108,51 +147,61 @@ const Footer = () => {
                       );
                     })}
                   </div>
+
                   <div className="form-group mt-3">
                     <label htmlFor="review">Review Description:</label>
-                    <textarea 
-                      className="form-control" 
-                      id="review" 
-                      rows="3" 
+
+                    <textarea className="form-control"
+
+                      id="review"
+                      name="review"
+                      type="message"
+                      value={FormData.ratingReview}
+                      onChange={handleChange}
+                      rows="3"
                       placeholder="Write your review here..."
                     ></textarea>
+
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
-                  <button type="button" className="btn btn-primary">Submit Review</button>
-                </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                    <button type="submit" className="btn btn-primary">Submit Review</button>
+                  </div>
+                </form>
+
+
+
+
               </div>
             </div>
           </div>
         )}
         {/* Share Icons */}
-        
+
         <section className="footer" id="footer">
           <section className="form-footer">
             <h5 className="text-center mb-2">Designed by Fab Five  </h5>
             <div className="text-center mb-0">
               <h6>&copy; {new Date().getFullYear()} All rights reserved.</h6>
             </div>
-            
+
           </section>
           <section className="share-icon">
-          <a href="https://wa.me/?text=Check%20out%20Prestigle%20Planners!%20https://prestigleplanners.com" target="_blank" rel="noreferrer">
-            <FontAwesomeIcon icon={faWhatsapp} size="3x" style={{ color: 'green', marginRight: '20px' }} />
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://prestigleplanners.com" target="_blank" rel="noreferrer">
-            <FontAwesomeIcon icon={faFacebook} size="3x" style={{ color: 'blue', marginRight: '20px' }} />
-          </a>
-          <a href="https://www.instagram.com/?url=https://prestigleplanners.com" target="_blank" rel="noreferrer">
-            <FontAwesomeIcon icon={faInstagram} size="3x" style={{ color: 'purple' }} />
-          </a>
+            <a href="https://wa.me/?text=Check%20out%20Prestigle%20Planners!%20https://prestigleplanners.com" target="_blank" rel="noreferrer">
+              <FontAwesomeIcon icon={faWhatsapp} size="3x" style={{ color: 'green', marginRight: '20px' }} />
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://prestigleplanners.com" target="_blank" rel="noreferrer">
+              <FontAwesomeIcon icon={faFacebook} size="3x" style={{ color: 'blue', marginRight: '20px' }} />
+            </a>
+            <a href="https://www.instagram.com/?url=https://prestigleplanners.com" target="_blank" rel="noreferrer">
+              <FontAwesomeIcon icon={faInstagram} size="3x" style={{ color: 'purple' }} />
+            </a>
+          </section>
         </section>
-        </section>
-        
+
 
       </div>
     </footer>
   );
 };
 
-export default Footer;
