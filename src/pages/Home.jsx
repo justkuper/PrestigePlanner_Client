@@ -18,7 +18,7 @@ const Home = () => {
       <h1 className="home-title">Welcome!</h1>
       <div className="home-content">
         <p>
-          We're glad to see you again. With our platform, managing your events has never been easier. You can view all of your upcoming reservations and make any necessary changes with just a few clicks. Thank you for choosing our  DineEasy . We're confident that our platform will make your  planning experience a seamless one.
+          We're glad to see you again. With our platform, managing your events has never been easier. You can view all of your upcoming events and make any necessary changes with just a few clicks. Thank you for choosing our  PrestigePlanner . We're confident that our platform will make your  planning experience a seamless one.
         </p>
       </div>
       <div className="container">
