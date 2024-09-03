@@ -81,14 +81,6 @@ export default function Contact() {
                 </div>
                 <button className="mt-2 mb-2 submitButton" type="submit">Let's Unite</button>
             </form>
-
-            <footer>
-                <div className="d-flex justify-content-center">
-                    <a className="p-5" href="mailto:daniel@wickedflow.com">Email</a>
-                    <a className="p-5" href="https://github.com/WickedDan">Github</a>
-                    <a className="p-5 " href="https://www.instagram.com/daniel_h_contreras/">Instagram</a>
-                </div>
-            </footer>
         </div>
     );
 }
