@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-
+import axios from 'axios'; // Import Axios ---> Change 4 
 import placeholder from "../assets/placeholder.png";
 import { GET_ONE_EVENT } from "../utils/queries";
 import {
@@ -35,7 +35,8 @@ const EventDetails = () => {
     minutes: 0,
     seconds: 0,
   });
-
+   
+  const [imageSrc, setImageSrc] = useState(placeholder);    /// change 1 
   const { eventId } = useParams();
 
   const { loading, error, data } = useQuery(GET_ONE_EVENT, {
@@ -58,6 +59,32 @@ const EventDetails = () => {
         time: timeString,
       });
       setCountDown(timeStamp);
+      // Fetch the AI-generated image based on the event title    // change 2 
+      const fetchImage = async (title) => {
+        try {
+          const response = await axios.post(
+            'https://api.openai.com/v1/images/generations',
+            {
+              prompt: title,
+              n: 1,
+              size: "512x512"
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+              }
+            }
+          );
+          const imageData = response.data.data[0].url;
+          setImageSrc(imageData); // assuming the API returns the image URL in `url`
+        } catch (error) {
+          console.error("Error generating image:", error);
+          setImageSrc(placeholder); // fallback to placeholder if error occurs
+        }
+      };
+
+      fetchImage(data.event.title);
     }
   }, [loading]);
 
@@ -121,7 +148,7 @@ const EventDetails = () => {
 
   const countDownStyle = {
     height: "300px",
-    background: "linear-gradient(to right, pink, orange)", //change gradient colors here
+    background: "linear-gradient(to right, blue, pink)", //change gradient colors here
   };
 
   const buttonStyle = {
@@ -216,7 +243,7 @@ const EventDetails = () => {
               <Card.Img
                 variant="top"
                 className="border-0 p-3 h-100"
-                src={placeholder}
+                src={imageSrc} // Change 3
               />
             </Col>
           </Row>

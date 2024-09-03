@@ -46,9 +46,9 @@ export default function Contact() {
         <div>
             <form className="container d-flex flex-column justify-content-center min-vh-100" onSubmit={handleSubmit}>
                 <div>
-                    <h1 className="title">Contact</h1>
-                    <label className="form-label bg-light" htmlFor="name">Name</label>
-                    <input className="form-control"
+                    <h1 className="title text-glow" >Contact</h1>
+                    <label className="form-label font-extrabold text-black drop-shadow-lg text-glow" htmlFor="name">Name</label>
+                    <input className="form-control inputField glow"
                         type="text"
                         id="name"
                         name="name"
@@ -58,8 +58,8 @@ export default function Contact() {
                     />
                 </div>
                 <div>
-                    <label className="form-label bg-light" htmlFor="email">Email</label>
-                    <input className="form-control"
+                    <label className="form-label font-extrabold text-black drop-shadow-lg text-glow" htmlFor="email">Email</label>
+                    <input className="form-control inputField glow"
                         type="email"
                         id="email"
                         name="email"
@@ -69,8 +69,8 @@ export default function Contact() {
                     />
                 </div>
                 <div className>
-                    <label className="form-label bg-light" htmlFor="message">Message</label>
-                    <textarea className="form-control"
+                    <label className="form-label font-extrabold text-black drop-shadow-lg text-glow" htmlFor="message">Message</label>
+                    <textarea className="form-control textareaField glow"
                         id="message"
                         name="message"
                         value={formData.message}
@@ -79,7 +79,7 @@ export default function Contact() {
                         required
                     ></textarea>
                 </div>
-                <button className="mt-2 mb-2 submitButton" type="submit">Let's Unite</button>
+                <button className="mt-2 mb-2 submitButton text-glow" type="submit"  >Let's Unite</button>
             </form>
         </div>
     );

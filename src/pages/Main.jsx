@@ -22,7 +22,7 @@ const Main = ({ loggedIn, children }) => {
         <header>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-              <a className="navbar-brand fs-2" href="/">Prestige Planner</a>
+              <a className="navbar-brand fs-2 font-serif" href="/">Prestige Planner</a>
               <button
                 className="navbar-toggler"
                 type="button"
