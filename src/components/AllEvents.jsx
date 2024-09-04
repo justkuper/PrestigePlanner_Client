@@ -58,6 +58,10 @@ const AllEvents = () => {
         background: 'linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)',
         padding: '20px',
         borderRadius: '8px',
+        minHeight: "130vh",
+        backgroundAttachment: "fixed",
+        width: '90%', 
+        maxWidth: '1200px',
       }}
     >
       <h3 className="mb-4">All Events</h3>
