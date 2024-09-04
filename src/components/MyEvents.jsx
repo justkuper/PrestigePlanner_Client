@@ -76,7 +76,7 @@ const MyEvents = () => {
   };
 
   const gradientBackgroundStyle = {
-    background: "linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)", 
+    background: "linear-gradient(135deg, lightyellow 2%, #a8c0ff 40%, #3f2b96 100%)", 
     minHeight: "130vh", // Ensure it covers the full viewport height
     padding: "20px", // Optional padding for spacing
     backgroundAttachment: "fixed", // Keeps the background fixed when scrolling

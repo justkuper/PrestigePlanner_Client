@@ -55,7 +55,7 @@ const AllEvents = () => {
     <div
       className="container"
       style={{
-        background: 'linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)',
+        background: 'linear-gradient(to right, blue, pink)',
         padding: '20px',
         borderRadius: '8px',
         minHeight: "130vh",
