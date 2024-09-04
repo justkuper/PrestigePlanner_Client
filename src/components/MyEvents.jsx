@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
@@ -20,14 +20,20 @@ import {
 import calendar from "../assets/calendar.jpg";
 
 import { DELETE_EVENT } from "../utils/mutations";
-import { GET_ONE_USER } from "../utils/queries";
+import { GET_ONE_USER, GET_ALL_EVENTS } from "../utils/queries";
 import Auth from "../utils/auth";
 
 const MyEvents = () => {
   // adding hover feature
   const [hover, setHover] = useState(null);
-  const [deleteEvent] = useMutation(DELETE_EVENT);
+  const [deleteEvent] = useMutation(DELETE_EVENT, {
+    refetchQueries: [{ query: GET_ALL_EVENTS }]
+  });
 
+  const [events, setEvents] = useState([])
+  const [user, setUser
+
+  ] = useState({})
   //getting the loggedin user's ID
   const userToken = Auth.getProfile();
   const userId = userToken.data._id;
@@ -61,7 +67,7 @@ const MyEvents = () => {
   if (error) console.log(error.message);
   console.log(data);
 
-  const { user } = data || {};
+  // const { user } = data || {};
 
   const eventHoverStyle = {
     position: "absolute",
@@ -76,17 +82,22 @@ const MyEvents = () => {
   };
 
   const gradientBackgroundStyle = {
-    background: "linear-gradient(135deg, lightyellow 2%, #a8c0ff 40%, #3f2b96 100%)", 
+    background: "linear-gradient(135deg, light 2%, #a8c0ff 40%, #3f2b96 100%)",
     minHeight: "130vh", // Ensure it covers the full viewport height
     padding: "20px", // Optional padding for spacing
     backgroundAttachment: "fixed", // Keeps the background fixed when scrolling
   };
+  useEffect(() => {
 
+    console.log("Finally deleting it !!!!! ?")
+    setUser(data?.user || {}) 
+    setEvents(data?.user?.events || [])
+  }, [data])
   if (!loading) {
     //checks if done loading (loading= false)
-    const events = user.events;
-    console.log(events);
-
+    // const events = user.events;
+    // console.log(events);
+    
     return (
       <>
         <div style={gradientBackgroundStyle}>
@@ -99,7 +110,7 @@ const MyEvents = () => {
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
                 color: '#333'
               }}>
-                Welcome {user.username}!
+                Welcome {user?.username}!
               </h3>
               <div>
                 {/* conditional rendering if the user has events */}

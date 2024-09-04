@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState , useEffect} from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { GET_ALL_EVENTS } from "../utils/queries";
@@ -6,8 +6,17 @@ import notebookImage from "../assets/note-book-image.jpg";
 import { motion } from "framer-motion";
 
 const AllEvents = () => {
-  const { loading, data } = useQuery(GET_ALL_EVENTS);
+  const { loading, data } = useQuery(GET_ALL_EVENTS, {
+    fetchPolicy: 'network-only',
+  });
 
+  const [events, setEvents] = useState([])
+  useEffect(() => {
+    
+    console.log("Are we deleting it ?")
+   setEvents(data?.events||[])
+  }, [data])
+  
   if (loading) {
     return (
       <div
@@ -49,7 +58,7 @@ const AllEvents = () => {
     );
   }
 
-  const events = data.events;
+  // const events = data.events;
 
   return (
     <div
