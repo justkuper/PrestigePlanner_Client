@@ -97,7 +97,7 @@ const UpdateEvent = () => {
             </div>
           </Alert>
         ))}
-      <div style={{ background: 'linear-gradient(to right, lightblue , yellow)', padding: '5%' }}>
+      <div style={{ background: 'linear-gradient(to top right,  #a0fa0698 0%, skyblue 50%,#030d0f47 100%)', padding: '5%' }}>
         <Container>
           <h1 style={{ fontFamily: 'Cursive', color: '#333', fontWeight: 'bolder',textShadow: '0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.6)' }}>Edit Your Event:</h1>
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
