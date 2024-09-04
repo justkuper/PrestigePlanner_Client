@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { GET_ONE_EVENT } from "../utils/queries";
 import { UPDATE_EVENT } from "../utils/mutations";
 import { Container, Col, Form, Button, Row, Alert } from "react-bootstrap";
+import Calculator from "./Calculator"; // Import the Calculator component
 
 const UpdateEvent = () => {
   const [updateEvent] = useMutation(UPDATE_EVENT);
