@@ -10,7 +10,13 @@ const AllEvents = () => {
 
   if (loading) {
     return (
-      <div className="container d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+      <div
+        className="container d-flex justify-content-center align-items-center"
+        style={{
+          height: '100vh',
+          background: 'linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)', // Same gradient as cards container
+        }}
+      >
         <motion.div
           className="loading-container"
           initial={{ opacity: 0 }}
@@ -46,7 +52,14 @@ const AllEvents = () => {
   const events = data.events;
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        background: 'linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)',
+        padding: '20px',
+        borderRadius: '8px',
+      }}
+    >
       <h3 className="mb-4">All Events</h3>
       {events.length === 0 ? (
         <div>No events found</div>
