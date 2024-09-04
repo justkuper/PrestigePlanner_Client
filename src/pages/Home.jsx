@@ -1,31 +1,66 @@
+import React from "react";
+import { motion } from "framer-motion";
 import Contact from "../components/Contact";
 import "../index.css";
 import eventImage from "../assets/event.jpg";
 
 function Donation() {
   return (
-    <div className="donation-container">
+    <motion.div
+      className="donation-container"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
       <h2 className="donation-heading">Donation</h2>
-      <p>If you'd like to support our work, you can donate using the button below:</p>
+      <p>
+        If you'd like to support our work, you can donate using the button below:
+      </p>
       <button className="donation-button">Donate</button>
-    </div>
+    </motion.div>
   );
 }
 
 const Home = () => {
   return (
-    <div className="home-container">
-      <h1 className="home-title">Welcome!</h1>
-      <div className="home-content">
+    <motion.div
+      className="home-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+    >
+      <motion.h1
+        className="home-title"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        Welcome!
+      </motion.h1>
+      <motion.div
+        className="home-content"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 0.2 }}
+      >
         <p>
-          We're glad to see you again. With our platform, managing your events has never been easier. You can view all of your upcoming events and make any necessary changes with just a few clicks. Thank you for choosing our  PrestigePlanner . We're confident that our platform will make your  planning experience a seamless one.
+          We're glad to see you again. With our platform, managing your events
+          has never been easier. You can view all of your upcoming events and
+          make any necessary changes with just a few clicks. Thank you for
+          choosing our PrestigePlanner. We're confident that our platform will
+          make your planning experience a seamless one.
         </p>
-      </div>
-      <div className="container">
+      </motion.div>
+      <motion.div
+        className="container"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      >
         <Contact />
         <Donation />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

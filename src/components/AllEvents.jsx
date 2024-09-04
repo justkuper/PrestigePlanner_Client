@@ -3,18 +3,63 @@ import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { GET_ALL_EVENTS } from "../utils/queries";
 import notebookImage from "../assets/note-book-image.jpg";
+import { motion } from "framer-motion";
 
 const AllEvents = () => {
   const { loading, data } = useQuery(GET_ALL_EVENTS);
 
   if (loading) {
-    return <div>Loading events...</div>;
+    return (
+      <div
+        className="container d-flex justify-content-center align-items-center"
+        style={{
+          height: '100vh',
+          background: 'linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)', // Same gradient as cards container
+        }}
+      >
+        <motion.div
+          className="loading-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+        >
+          <motion.div
+            className="loading-dot"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
+            style={{ backgroundColor: '#007bff', width: 20, height: 20, borderRadius: '50%' }}
+          />
+          <motion.div
+            className="loading-dot"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
+            style={{ backgroundColor: '#007bff', width: 20, height: 20, borderRadius: '50%', marginLeft: 10 }}
+          />
+          <motion.div
+            className="loading-dot"
+            initial={{ y: 0 }}
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
+            style={{ backgroundColor: '#007bff', width: 20, height: 20, borderRadius: '50%', marginLeft: 10 }}
+          />
+        </motion.div>
+      </div>
+    );
   }
 
   const events = data.events;
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        background: 'linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%)',
+        padding: '20px',
+        borderRadius: '8px',
+      }}
+    >
       <h3 className="mb-4">All Events</h3>
       {events.length === 0 ? (
         <div>No events found</div>
@@ -26,7 +71,13 @@ const AllEvents = () => {
                 to={`/eventDetails/${event.id}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <div className="card h-100">
+                <motion.div
+                  className="card h-100"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+                  whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)" }}
+                >
                   {parseInt(event.date) > new Date().getTime() ? (
                     <img
                       src={notebookImage}
@@ -51,7 +102,7 @@ const AllEvents = () => {
                           color: "white",
                         }}
                       >
-                        This Event  is done
+                        This Event is done
                       </p>
                     </div>
                   )}
@@ -77,7 +128,7 @@ const AllEvents = () => {
                       {event.user ? "Organized by " + event.user.username : ""}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </Link>
             </div>
           ))}

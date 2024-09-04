@@ -194,3 +194,68 @@
   font-weight: bolder;
   font-size: xxx-large;
 }
+
+/* Animation for the modal background */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Animation for the modal content */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Apply the fade-in animation to the modal background */
+.modal.show.d-block {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Apply the slide-in animation to the modal dialog */
+.modal-dialog {
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Animation for the star rating */
+@keyframes starBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.star {
+  transition: color 0.3s ease;
+}
+
+.star:hover {
+  animation: starBounce 0.5s ease;
+}
+
+/* Fade-in effect for the review description textarea */
+@keyframes fadeInTextArea {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.form-group textarea {
+  animation: fadeInTextArea 0.5s ease-out;
+}

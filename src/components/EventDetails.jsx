@@ -61,6 +61,7 @@ const EventDetails = () => {
       setCountDown(timeStamp);
       // Fetch the AI-generated image based on the event title    // change 2 
       const fetchImage = async (title) => {
+        console.log(import.meta.env.VITE_OPENAI_API_KEY);
         try {
           const response = await axios.post(
             'https://api.openai.com/v1/images/generations',
