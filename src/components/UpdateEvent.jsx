@@ -187,7 +187,7 @@ const UpdateEvent = () => {
                             }
                             type="number"
                             placeholder="Reservation Cost"
-                            step="10"
+                            step="0.01"
                             min="0"
                             required
                             style={{ fontFamily: 'Cursive', fontSize: '21px' }}
