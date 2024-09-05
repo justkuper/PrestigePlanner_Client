@@ -67,7 +67,7 @@ const AllEvents = () => {
         background: 'linear-gradient(to right, blue, pink)',
         padding: '20px',
         borderRadius: '8px',
-        minHeight: "130vh",
+        minHeight: "137vh",
         backgroundAttachment: "fixed",
         width: '90%', 
         maxWidth: '1200px',
