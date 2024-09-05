@@ -20,28 +20,19 @@ import {
 import calendar from "../assets/calendar.jpg";
 
 import { DELETE_EVENT } from "../utils/mutations";
-import { GET_ONE_USER, GET_ALL_EVENTS } from "../utils/queries";
+import { GET_ONE_USER } from "../utils/queries";
 import Auth from "../utils/auth";
 
 const MyEvents = () => {
-  // adding hover feature
   const userToken = Auth.getProfile();
   const userId = userToken.data._id;
   const [hover, setHover] = useState(null);
   const [deleteEvent] = useMutation(DELETE_EVENT, {
-    refetchQueries: [{ query: GET_ONE_USER , variables: {
-      userId: userId 
-    }}]
+    refetchQueries: [{ query: GET_ONE_USER, variables: { userId: userId } }],
   });
 
-  const [events, setEvents] = useState([])
-  const [user, setUser
-
-  ] = useState({})
-  //getting the loggedin user's ID
-  // const userToken = Auth.getProfile();
-  // const userId = userToken.data._id;
-  console.log(userId);
+  const [events, setEvents] = useState([]);
+  const [user, setUser] = useState({});
 
   const onHover = (eventId) => {
     setHover(eventId);
@@ -63,15 +54,11 @@ const MyEvents = () => {
     }
   };
 
-  //retrieving logged in users data
   const { loading, error, data } = useQuery(GET_ONE_USER, {
     variables: { userId: userId },
   });
 
   if (error) console.log(error.message);
-  console.log(data);
-
-  // const { user } = data || {};
 
   const eventHoverStyle = {
     position: "absolute",
@@ -86,61 +73,62 @@ const MyEvents = () => {
   };
 
   const gradientBackgroundStyle = {
-    background: "linear-gradient(135deg, light 2%, #a8c0ff 40%, #3f2b96 100%)",
+    background: "linear-gradient(135deg, #72EDF2 10%, #5151E5 100%)",
     minHeight: "137vh", // Ensure it covers the full viewport height
     padding: "20px", // Optional padding for spacing
     backgroundAttachment: "fixed", // Keeps the background fixed when scrolling
   };
-  useEffect(() => {
 
-    console.log("Finally deleting it !!!!! ?")
-    setUser(data?.user || {}) 
-    setEvents(data?.user?.events || [])
-  }, [data])
+  useEffect(() => {
+    setUser(data?.user || {});
+    setEvents(data?.user?.events || []);
+  }, [data]);
+
   if (!loading) {
-    //checks if done loading (loading= false)
-    // const events = user.events;
-    // console.log(events);
-    
     return (
       <>
         <div style={gradientBackgroundStyle}>
           <Container className="center">
             <div className="mx-auto p-5">
-              <h3 style={{
-                fontFamily: 'cursive',
-                fontWeight: 'bold',
-                fontSize: 'xxx-large',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
-                color: '#333'
-              }}>
+              <h3
+                style={{
+                  fontFamily: "cursive",
+                  fontWeight: "bold",
+                  fontSize: "xxx-large",
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+                  color: "#333",
+                }}
+              >
                 Welcome {user?.username}!
               </h3>
               <div>
-                {/* conditional rendering if the user has events */}
                 {events.length > 0 ? (
                   <>
-                    <h4 style={{
-                      fontFamily: 'Cursive',
-                      fontWeight: 'bold',
-                      fontSize: '1.75rem',
-                      color: '#444',
-                      marginTop: '2rem',
-                      textShadow: '1px 1px 3px rgba(0, 0, 0, 0.1)',
-                    }} className="mt-5">
+                    <h4
+                      style={{
+                        fontFamily: "Cursive",
+                        fontWeight: "bold",
+                        fontSize: "1.75rem",
+                        color: "#444",
+                        marginTop: "2rem",
+                        textShadow: "1px 1px 3px rgba(0, 0, 0, 0.1)",
+                      }}
+                      className="mt-5"
+                    >
                       Here are your Events:
                     </h4>
-                    <p style={{
-                      fontFamily: 'Cursive',
-                      fontSize: '1.25rem',
-                      color: '#555',
-                      marginTop: '0.5rem',
-                      lineHeight: '1.6',
-                      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)',
-                    }}>
+                    <p
+                      style={{
+                        fontFamily: "Cursive",
+                        fontSize: "1.25rem",
+                        color: "#555",
+                        marginTop: "0.5rem",
+                        lineHeight: "1.6",
+                        textShadow: "1px 1px 2px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
                       To edit or delete events, hover over the image
                     </p>
-                    {/* rendering user's events with map method*/}
                     <Container>
                       <Row xs={1} md={2} lg={3} className="g-4">
                         {events.map((event) => (
@@ -148,9 +136,13 @@ const MyEvents = () => {
                             <Card
                               onMouseEnter={() => onHover(event.id)}
                               onMouseLeave={() => onLeave(null)}
-                              style={{ width: "18rem" }}
+                              style={{
+                                width: "18rem",
+                                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                                transform: hover === event.id ? "scale(1.05)" : "scale(1)",
+                                boxShadow: hover === event.id ? "0 8px 16px rgba(0, 0, 0, 0.2)" : "none",
+                              }}
                             >
-                              {/* update and delete icon appear on hover */}
                               {parseInt(event.date) > new Date().getTime() ? (
                                 <img
                                   src={calendar}
@@ -205,21 +197,32 @@ const MyEvents = () => {
                               <Card.Body>
                                 <Card.Title>{event.title}</Card.Title>
                                 <Card.Text>{event.description}</Card.Text>
-                                {/* Remember to link proper event details page */}
                                 <Button
                                   as={Link}
                                   to={`/eventDetails/${event.id}`}
                                   variant="primary"
-                                  style={{ backgroundColor: 'orange', color: 'white', borderColor: 'orange', marginLeft: '10px' }}
+                                  style={{
+                                    backgroundColor: "orange",
+                                    color: "white",
+                                    borderColor: "orange",
+                                    marginLeft: "10px",
+                                  }}
                                 >
                                   more details
                                 </Button>
                                 <Button
-                                as={Link}
-                                to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
-                                variant="secondary"
-                                style={{ backgroundColor: 'orange', color: 'white', borderColor: 'orange', marginLeft: '10px' }}
-                              >Google Calender</Button>
+                                  as={Link}
+                                  to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
+                                  variant="secondary"
+                                  style={{
+                                    backgroundColor: "orange",
+                                    color: "white",
+                                    borderColor: "orange",
+                                    marginLeft: "10px",
+                                  }}
+                                >
+                                  Google Calendar
+                                </Button>
                               </Card.Body>
                             </Card>
                           </Col>
@@ -228,7 +231,6 @@ const MyEvents = () => {
                     </Container>
                   </>
                 ) : (
-                  // if the user has no events:
                   <>
                     <h4 className="mt-5">You haven't made any reservations yet!</h4>
                     <p>
@@ -237,7 +239,6 @@ const MyEvents = () => {
                   </>
                 )}
               </div>
-              {/* link to create event on click */}
               <OverlayTrigger
                 overlay={
                   <Tooltip id="tooltip-disabled">Make a new reservation!</Tooltip>
@@ -254,12 +255,14 @@ const MyEvents = () => {
                     right: "100px",
                     width: "50px",
                     height: "50px",
+                    backgroundColor: "black", // Change the icon button color to black
+                    borderColor: "black", // Ensure border matches the background color
                   }}
                   key="addEventBtn"
                   onMouseEnter={() => onHover("addEventBtn")}
                   onMouseLeave={() => onLeave(null)}
                 >
-                  <FontAwesomeIcon icon={faPlus} size="2x" />
+                  <FontAwesomeIcon icon={faPlus} size="2x" color="white" /> {/* Change the icon color to white */}
                 </Button>
               </OverlayTrigger>
             </div>
