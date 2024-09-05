@@ -87,7 +87,7 @@ const MyEvents = () => {
 
   const gradientBackgroundStyle = {
     background: "linear-gradient(135deg, light 2%, #a8c0ff 40%, #3f2b96 100%)",
-    minHeight: "135vh", // Ensure it covers the full viewport height
+    minHeight: "137vh", // Ensure it covers the full viewport height
     padding: "20px", // Optional padding for spacing
     backgroundAttachment: "fixed", // Keeps the background fixed when scrolling
   };
@@ -210,9 +210,16 @@ const MyEvents = () => {
                                   as={Link}
                                   to={`/eventDetails/${event.id}`}
                                   variant="primary"
+                                  style={{ backgroundColor: 'orange', color: 'white', borderColor: 'orange', marginLeft: '10px' }}
                                 >
                                   more details
                                 </Button>
+                                <Button
+                                as={Link}
+                                to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
+                                variant="secondary"
+                                style={{ backgroundColor: 'orange', color: 'white', borderColor: 'orange', marginLeft: '10px' }}
+                              >Google Calender</Button>
                               </Card.Body>
                             </Card>
                           </Col>
