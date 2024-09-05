@@ -24,7 +24,7 @@ import UpdateEvent from "./components/UpdateEvent";
 import EventDetails from "./components/EventDetails";
 
 const httpLink = createHttpLink({
-  uri: `${import.meta.env.VITE_BASE_URL}/graphql`
+  uri: `${import.meta.env.VITE_BASE_URL}/graphql`,
   
 });    // Connects backend
 
@@ -42,7 +42,7 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  // uri: "http://localhost:3001/qraphql",
+ 
   cache: new InMemoryCache(),
 });
 
