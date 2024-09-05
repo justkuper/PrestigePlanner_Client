@@ -3,9 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ONE_EVENT } from "../utils/queries";
 import { UPDATE_EVENT } from "../utils/mutations";
-import { Container, Col, Form, Button, Row, Alert } from "react-bootstrap";
+import { Container, Col, Form, Button, Row, Alert, OverlayTrigger, Popover } from "react-bootstrap";
 import Calculator from "./Calculator"; // Import the Calculator component
-import { FaCalculator } from 'react-icons/fa'; // Import the calculator icon from react-icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion"; // Import Framer Motion components
 
 const UpdateEvent = () => {
@@ -66,6 +67,14 @@ const UpdateEvent = () => {
     }
   };
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <Calculator />
+      </Popover.Body>
+    </Popover>
+  );
+
   return (
     <>
       {showAlert &&
@@ -97,9 +106,9 @@ const UpdateEvent = () => {
             </div>
           </Alert>
         ))}
-      <div style={{ background: 'linear-gradient(to top right,  #a0fa0698 0%, skyblue 50%,#030d0f47 100%)', padding: '5%' }}>
+      <div style={{ background: 'linear-gradient(to top right,  #a0fa0698 0%, skyblue 50%,#030d0f47 100%)', padding: '5%' ,minHeight: "137vh",}}>
         <Container>
-          <h1 style={{ fontFamily: 'Cursive', color: '#333', fontWeight: 'bolder',textShadow: '0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.6)' }}>Edit Your Event:</h1>
+          <h1 style={{ fontFamily: 'Cursive', color: '#333', fontWeight: 'bolder', textShadow: '0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.6)' }}>Edit Your Event:</h1>
           <div style={{ display: 'flex', alignItems: 'flex-start' }}>
             <div style={{ flex: '1' }}>
               <motion.div
@@ -130,7 +139,7 @@ const UpdateEvent = () => {
                             type="text"
                             placeholder={eventInput.title}
                             required
-                            style={{ fontFamily: 'Cursive', fontSize: '21px' }} 
+                            style={{ fontFamily: 'Cursive', fontSize: '21px' }}
                           />
                         </Form.Group>
                       </motion.div>
@@ -170,11 +179,7 @@ const UpdateEvent = () => {
                       >
                         <Form.Group>
                           <Form.Label style={{ fontFamily: 'Cursive', fontSize: '24px' }}>
-                            Cost: 
-                            <FaCalculator
-                              style={{ cursor: 'pointer', marginLeft: '8px', color: 'blue' }}
-                              onClick={() => setShowCalculator(!showCalculator)}
-                            />
+                            Cost:
                           </Form.Label>
                           <Form.Control
                             name="cost"
@@ -192,6 +197,33 @@ const UpdateEvent = () => {
                             required
                             style={{ fontFamily: 'Cursive', fontSize: '21px' }}
                           />
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="right"
+                            overlay={
+                              <Popover id="calculator-popover">
+                                <Popover.Header as="h3">Calculator</Popover.Header>
+                                <Popover.Body>
+                                  <Calculator />
+                                </Popover.Body>
+                              </Popover>
+                            }
+                          > <Button
+                            variant="secondary"
+                            style={{
+                              position: 'absolute',
+                              right: '730px',
+                              top: '45.5%',
+                              transform: 'translateY(-50%)',
+                              padding: '0.5rem',
+                              borderRadius: '50%',
+                              backgroundColor: '#5151E5',
+                              border: 'none',
+                            }}
+                          >
+                              <FontAwesomeIcon icon={faCalculator} />
+                            </Button>
+                          </OverlayTrigger>
                         </Form.Group>
                       </motion.div>
 
@@ -237,32 +269,31 @@ const UpdateEvent = () => {
                                 date: e.target.value,
                               })
                             }
-                            type="datetime-local"
-                            placeholder="Event Date"
+                            type="date"
                             required
                             style={{ fontFamily: 'Cursive', fontSize: '21px' }}
                           />
                         </Form.Group>
                       </motion.div>
-
-                      <Button variant="success" type="submit" size="lg" style={{ fontFamily: 'Cursive', fontSize: '24px' }}>
-                        Edit
-                      </Button>
                     </Col>
                   </Row>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+                    className="text-center"
+                  >
+                    <Button
+                      type="submit"
+                      variant="success"
+                      style={{ fontFamily: 'Cursive', fontSize: '18px', padding: '10px 20px' }}
+                    >
+                      Update Event
+                    </Button>
+                  </motion.div>
                 </Form>
               </motion.div>
             </div>
-            {showCalculator && (
-              <motion.div
-                initial={{ opacity: 0, translateX: 50 }}
-                animate={{ opacity: 1, translateX: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ flex: '0 0 300px', marginLeft: '20px' }}
-              >
-                <Calculator />
-              </motion.div>
-            )}
           </div>
         </Container>
       </div>
