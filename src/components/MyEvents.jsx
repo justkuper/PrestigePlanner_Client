@@ -25,9 +25,13 @@ import Auth from "../utils/auth";
 
 const MyEvents = () => {
   // adding hover feature
+  const userToken = Auth.getProfile();
+  const userId = userToken.data._id;
   const [hover, setHover] = useState(null);
   const [deleteEvent] = useMutation(DELETE_EVENT, {
-    refetchQueries: [{ query: GET_ALL_EVENTS }]
+    refetchQueries: [{ query: GET_ONE_USER , variables: {
+      userId: userId 
+    }}]
   });
 
   const [events, setEvents] = useState([])
@@ -35,8 +39,8 @@ const MyEvents = () => {
 
   ] = useState({})
   //getting the loggedin user's ID
-  const userToken = Auth.getProfile();
-  const userId = userToken.data._id;
+  // const userToken = Auth.getProfile();
+  // const userId = userToken.data._id;
   console.log(userId);
 
   const onHover = (eventId) => {
@@ -83,7 +87,7 @@ const MyEvents = () => {
 
   const gradientBackgroundStyle = {
     background: "linear-gradient(135deg, light 2%, #a8c0ff 40%, #3f2b96 100%)",
-    minHeight: "130vh", // Ensure it covers the full viewport height
+    minHeight: "137vh", // Ensure it covers the full viewport height
     padding: "20px", // Optional padding for spacing
     backgroundAttachment: "fixed", // Keeps the background fixed when scrolling
   };
@@ -206,9 +210,16 @@ const MyEvents = () => {
                                   as={Link}
                                   to={`/eventDetails/${event.id}`}
                                   variant="primary"
+                                  style={{ backgroundColor: 'orange', color: 'white', borderColor: 'orange', marginLeft: '10px' }}
                                 >
                                   more details
                                 </Button>
+                                <Button
+                                as={Link}
+                                to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
+                                variant="secondary"
+                                style={{ backgroundColor: 'orange', color: 'white', borderColor: 'orange', marginLeft: '10px' }}
+                              >Google Calender</Button>
                               </Card.Body>
                             </Card>
                           </Col>
