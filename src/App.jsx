@@ -24,7 +24,7 @@ import UpdateEvent from "./components/UpdateEvent";
 import EventDetails from "./components/EventDetails";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql"
+  uri: `${import.meta.env.VITE_BASE_URL}/graphql`
   
 });    // Connects backend
 
