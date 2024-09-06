@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import ReCAPTCHA from "react-google-recaptcha";
 
-const DonationForm = (props) => {
+const DonationForm = () => {
+  const stripe = useStripe();
+  const elements = useElements();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -11,8 +13,21 @@ const DonationForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (captcha) {
-      const { token } = await props.stripe.createToken();
-      // Use the token to create a charge on your server
+      if (!stripe || !elements) {
+        // Stripe.js has not yet loaded.
+       
+        return;
+      }
+
+      const cardElement = elements.getElement(CardElement);
+
+      const { error, token } = await stripe.createToken(cardElement);
+      if (error) {
+        console.error(error);
+      } else {
+        console.log("Received Stripe token:", token);
+        // Use the token to create a charge on your server
+      }
     } else {
       alert('Please complete the CAPTCHA');
     }
@@ -46,9 +61,11 @@ const DonationForm = (props) => {
         sitekey="your-recaptcha-site-key"
         onChange={() => setCaptcha(true)}
       />
-      <button type="submit">Donate</button>
+      <button type="submit" disabled={!stripe || !elements}>
+        Donate
+      </button>
     </form>
   );
 };
 
-export default injectStripe(DonationForm);
+export default DonationForm;

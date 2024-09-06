@@ -73,7 +73,7 @@ const AllEvents = () => {
         maxWidth: '1200px',
       }}
     >
-      <h3 className="mb-4">All Events</h3>
+      <h3 className="mb-4" style={{ fontSize: '42px' , fontFamily: 'Cursive', color: 'white', fontWeight: 'bolder', textShadow: '0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.6)' }}>All Events</h3>
       {events.length === 0 ? (
         <div>No events found</div>
       ) : (

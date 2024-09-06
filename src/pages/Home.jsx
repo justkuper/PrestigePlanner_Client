@@ -1,10 +1,12 @@
 import React from "react";
+
 import { motion } from "framer-motion";
 import Contact from "../components/Contact";
 import "../index.css";
 import eventImage from "../assets/event.jpg";
 
 function Donation() {
+  
   return (
     <motion.div
       className="donation-container"
@@ -16,7 +18,7 @@ function Donation() {
       <p>
         If you'd like to support our work, you can donate using the button below:
       </p>
-      <button className="donation-button">Donate</button>
+      <button className="donation-button" >Donate</button>
     </motion.div>
   );
 }

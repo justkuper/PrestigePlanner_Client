@@ -197,33 +197,34 @@ const MyEvents = () => {
                               <Card.Body>
                                 <Card.Title>{event.title}</Card.Title>
                                 <Card.Text>{event.description}</Card.Text>
-                                <Button
-                                  as={Link}
-                                  to={`/eventDetails/${event.id}`}
-                                  variant="primary"
-                                  style={{
-                                    backgroundColor: "orange",
-                                    color: "white",
-                                    borderColor: "orange",
-                                    marginLeft: "10px",
-                                  }}
-                                >
-                                  more details
-                                </Button>
-                                <Button
-                                  as={Link}
-                                  to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
-                                  variant="secondary"
-                                  style={{
-                                    backgroundColor: "orange",
-                                    color: "white",
-                                    borderColor: "orange",
-                                    marginLeft: "10px",
-                                  }}
-                                >
-                                  Google Calendar
-                                </Button>
+                                <div style={{ display: "flex", gap: "10px" }}>
+                                  <Button
+                                    as={Link}
+                                    to={`/eventDetails/${event.id}`}
+                                    variant="primary"
+                                    style={{
+                                      backgroundColor: "orange",
+                                      color: "white",
+                                      borderColor: "orange",
+                                    }}
+                                  >
+                                    More Details
+                                  </Button>
+                                  <Button
+                                    as={Link}
+                                    to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
+                                    variant="secondary"
+                                    style={{
+                                      backgroundColor: "orange",
+                                      color: "white",
+                                      borderColor: "orange",
+                                    }}
+                                  >
+                                    Google Calendar
+                                  </Button>
+                                </div>
                               </Card.Body>
+
                             </Card>
                           </Col>
                         ))}

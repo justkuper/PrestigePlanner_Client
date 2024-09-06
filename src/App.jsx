@@ -60,6 +60,7 @@ function App() {
             <Route path="/allEvents" element={<AllEvents />} />
             <Route path="/updateEvent/:eventId" element={<UpdateEvent />} />
             <Route path="/eventDetails/:eventId" element={<EventDetails />} />
+            
             <Route
               path="*"
               element={<h1 className="display-2">Wrong page!</h1>}

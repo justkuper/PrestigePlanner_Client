@@ -67,13 +67,7 @@ const UpdateEvent = () => {
     }
   };
 
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Body>
-        <Calculator />
-      </Popover.Body>
-    </Popover>
-  );
+  
 
   return (
     <>
@@ -192,38 +186,12 @@ const UpdateEvent = () => {
                             }
                             type="number"
                             placeholder="Reservation Cost"
-                            step="0.01"
+                            step="1"
                             min="0"
                             required
                             style={{ fontFamily: 'Cursive', fontSize: '21px' }}
                           />
-                          <OverlayTrigger
-                            trigger="click"
-                            placement="right"
-                            overlay={
-                              <Popover id="calculator-popover">
-                                <Popover.Header as="h3">Calculator</Popover.Header>
-                                <Popover.Body>
-                                  <Calculator />
-                                </Popover.Body>
-                              </Popover>
-                            }
-                          > <Button
-                            variant="secondary"
-                            style={{
-                              position: 'absolute',
-                              right: '730px',
-                              top: '45.5%',
-                              transform: 'translateY(-50%)',
-                              padding: '0.5rem',
-                              borderRadius: '50%',
-                              backgroundColor: '#5151E5',
-                              border: 'none',
-                            }}
-                          >
-                              <FontAwesomeIcon icon={faCalculator} />
-                            </Button>
-                          </OverlayTrigger>
+                          
                         </Form.Group>
                       </motion.div>
 
