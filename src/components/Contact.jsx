@@ -48,7 +48,7 @@ export default function Contact() {
                 <div>
                     <h1 className="title text-glow" >Contact</h1>
                     <label className="form-label font-extrabold text-black drop-shadow-lg text-glow" htmlFor="name">Name</label>
-                    <input className="form-control inputField glow"
+                    <input className="form-control inputField glow bg-light"
                         type="text"
                         id="name"
                         name="name"
@@ -59,7 +59,7 @@ export default function Contact() {
                 </div>
                 <div>
                     <label className="form-label font-extrabold text-black drop-shadow-lg text-glow" htmlFor="email">Email</label>
-                    <input className="form-control inputField glow"
+                    <input className="form-control inputField glow bg-light"
                         type="email"
                         id="email"
                         name="email"
@@ -70,7 +70,7 @@ export default function Contact() {
                 </div>
                 <div className>
                     <label className="form-label font-extrabold text-black drop-shadow-lg text-glow" htmlFor="message">Message</label>
-                    <textarea className="form-control textareaField glow"
+                    <textarea className="form-control textareaField glow bg-light"
                         id="message"
                         name="message"
                         value={formData.message}
