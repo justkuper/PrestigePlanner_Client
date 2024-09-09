@@ -20,6 +20,7 @@
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
     "framer-motion": "^11.5.2",
+    "gapi-script": "^1.2.0",
     "graphql": "^15.4.0",
     "jwt-decode": "^3.1.2",
     "lottie-web": "^5.12.2",

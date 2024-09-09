@@ -14,6 +14,7 @@ export const initClient = () => {
           clientId: CLIENT_ID,
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES,
+          redirectUri: 'http://localhost:5173',
         })
         .then(() => {
           resolve(gapi.auth2.getAuthInstance());

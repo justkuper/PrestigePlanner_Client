@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
 import {
@@ -13,6 +13,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import 'font-awesome/css/font-awesome.min.css';
 
 import './components/style.css'; // Add this line to import the style.css file
+
+import { initClient } from './googleCalenderApi';   // change 1 gapi 
 
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
@@ -48,6 +50,18 @@ const client = new ApolloClient({
 
 
 function App() {
+  useEffect(() => {             // change 2 gapi
+    const initializeGoogleAPI = async () => {
+      try {
+        await initClient();
+        console.log("Google API initialized");
+      } catch (error) {
+        console.error('Error initializing Google API:', error);
+      }
+    };
+
+    initializeGoogleAPI();
+  }, []);
   return (
     <ApolloProvider client={client}>
       <Router>

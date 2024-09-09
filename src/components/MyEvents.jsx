@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -18,7 +17,6 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import calendar from "../assets/calendar.jpg";
-
 import { DELETE_EVENT } from "../utils/mutations";
 import { GET_ONE_USER } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -54,6 +52,21 @@ const MyEvents = () => {
     }
   };
 
+  const handleAddToGoogleCalendar = (event) => {
+    const startDateTime = new Date(parseInt(event.date)).toISOString();
+    const endDateTime = new Date(parseInt(event.date) + 3600000).toISOString(); // Assuming the event is 1 hour long
+
+    const gCalUrl = `https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent(
+      event.title
+    )}&details=${encodeURIComponent(
+      event.description
+    )}&dates=${startDateTime.replace(/-|:|\.\d+/g, '')}/${endDateTime.replace(
+      /-|:|\.\d+/g, ''
+    )}&ctz=America/Los_Angeles`;
+
+    window.open(gCalUrl, "_blank");
+  };
+
   const { loading, error, data } = useQuery(GET_ONE_USER, {
     variables: { userId: userId },
   });
@@ -81,7 +94,7 @@ const MyEvents = () => {
 
   useEffect(() => {
     setUser(data?.user || {});
-    setEvents(data?.user?.events || []);
+    setEvents(data?.user?.events || {});
   }, [data]);
 
   if (!loading) {
@@ -211,20 +224,18 @@ const MyEvents = () => {
                                     More Details
                                   </Button>
                                   <Button
-                                    as={Link}
-                                    to={`https://calendar.google.com/calendar/u/0?cid=MDljMmE1YTlhZDU1NzExNTMyY2UzZjQ2ZjNjOWQyN2Q3NzY3MzA4NThlNTYzMjAzZGVlZDk2NTVlOGFjZjMxOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
                                     variant="secondary"
                                     style={{
                                       backgroundColor: "orange",
                                       color: "white",
                                       borderColor: "orange",
                                     }}
+                                    onClick={() => handleAddToGoogleCalendar(event)}
                                   >
-                                    Google Calendar
+                                    Add to Google Calendar
                                   </Button>
                                 </div>
                               </Card.Body>
-
                             </Card>
                           </Col>
                         ))}
@@ -232,12 +243,13 @@ const MyEvents = () => {
                     </Container>
                   </>
                 ) : (
-                  <>
+                  <div className="my-5">
+                    <h3>You have no events</h3>
                     <h4 className="mt-5">You haven't made any reservations yet!</h4>
                     <p>
                       To make a reservation, click the + icon on the bottom right
                     </p>
-                  </>
+                  </div>
                 )}
               </div>
               <OverlayTrigger
@@ -271,6 +283,9 @@ const MyEvents = () => {
         </div>
       </>
     );
+  } else {
+    return <div>Loading...</div>;
   }
 };
+
 export default MyEvents;
