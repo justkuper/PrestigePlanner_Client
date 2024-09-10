@@ -57,7 +57,7 @@ export default function Footer() {
 
   return (
     <footer className="footer mt-auto py-3 bg-dark text-white">
-      <div className="container">
+      <div className="container containerss">
         <section className="social-icons-wrapper d-flex flex-column flex-md-row justify-content-center my-3">
           {/* DANIEL'S SECTION */}
           <div className="d-flex flex-column align-items-center mx-md-2 transparent-bg ">
