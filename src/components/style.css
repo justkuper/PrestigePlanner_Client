@@ -170,9 +170,16 @@
   opacity: 1;
 }
 
+.icons {
+  flex-wrap: nowrap;
+}
+.review-btn {
+
+}
 .share-icon {
+  display: flex;
   position: absolute;
-  bottom: -715px;
+  bottom: -625px;
   right: 20px;
 }
 /* COMPONENTS/FOOTER END */
@@ -258,4 +265,16 @@
 
 .form-group textarea {
   animation: fadeInTextArea 0.5s ease-out;
+}
+
+@media (max-width: 600px) {
+  .share-icon, .review-btn{
+      transform: scale(0.8);
+  }
+}
+
+@media (max-width: 600px) {
+  .icons{
+      transform: scale(0.8);
+  }
 }
