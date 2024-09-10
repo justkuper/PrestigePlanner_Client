@@ -50,23 +50,7 @@ const AppNavbar = () => {
                 </Nav.Link>
               )}
               {/* Add theme toggle button */}
-              <Button
-                variant={theme === "dark" ? "outline-light" : "outline-dark"}
-                onClick={toggleTheme}
-                className="ml-2"
-              >
-                {theme === "dark" ? (
-                  <FontAwesomeIcon
-                    icon={faSun}
-                    style={{ color: theme === "dark" ? "white" : "black" }}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faMoon}
-                    style={{ color: theme === "dark" ? "white" : "black" }}
-                  />
-                )}
-              </Button>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

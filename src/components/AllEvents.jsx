@@ -69,8 +69,8 @@ const AllEvents = () => {
         borderRadius: '8px',
         minHeight: "137vh",
         backgroundAttachment: "fixed",
-        width: '90%', 
-        maxWidth: '1200px',
+        width: '100%', 
+        maxWidth: '3050px',
       }}
     >
       <h3 className="mb-4" style={{ fontSize: '42px' , fontFamily: 'Cursive', color: 'white', fontWeight: 'bolder', textShadow: '0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.6)' }}>All Events</h3>
