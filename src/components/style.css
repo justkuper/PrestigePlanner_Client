@@ -277,16 +277,35 @@
   animation: fadeInTextArea 0.5s ease-out;
 }
 
+<<<<<<< HEAD
+@media (max-width: 600px, max-height: 600px) {
+  :root{
+=======
  @media (max-width: 600px) {
   .share-icon, .review-btn{
+>>>>>>> dev
       transform: scale(0.8);
   }
 }
 
 @media (max-width: 600px) {
-  .icons{
-      transform: scale(0.8);
+  .share-icon, .icon, .review-btn, .name, .text-center{
+    transform: scale(0.8);
   }
+<<<<<<< HEAD
+  
+}
+
+@media (max-width: 500px, max-height: 600px) {
+  :root{
+      transform: scale(0.4);
+  }
+}
+
+@media (max-width: 500px) {
+  .share-icon, .icon, .review-btn, .name, .text-center{
+    transform: scale(0.4);
+=======
 }
 .footer-content {
   display: flex;
@@ -366,10 +385,16 @@
   }
   .fa-facebook .fa-whatsapp{
     margin-right: 20px !important;
+>>>>>>> dev
   }
   
 }
 
+<<<<<<< HEAD
+
+
+
+=======
 @media (min-width: 1400px) {
 
 .github-names{
@@ -381,3 +406,4 @@
   margin-top: 30px ;
 }
 }
+>>>>>>> dev
